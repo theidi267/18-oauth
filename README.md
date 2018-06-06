@@ -8,17 +8,12 @@
 * Students will learn to add Google OAuth to an express/mongo app
 
 ## Requirements  
-#### Configuration  
-* make a copy of slugchat-backend-starter-code in the `/lab-<yourname>/slugchat-backend` directory
-* create a `/lab-<yourname>/slugchat-frontend` directory
-
-#### Feature Tasks  
 
 #### backend
 * create an app on the google dev console
  * configure oauth credentials to support a client app on `http://localhost`
  * configure oauth credentials to support a server redirect uri to `http://localhost:3000/oauth/google/code`
-* create a backend route `GET /oauth/google/code` for handling google oauth 
+* create a backend route in your auth server: `GET /oauth/google/code` for handling google oauth 
 
 #### frontend 
 * create an index.html with an anchor tag pointing to the google authorization page 
