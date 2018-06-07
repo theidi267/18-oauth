@@ -3,6 +3,8 @@
 import express from 'express';
 const authRouter = express.Router();
 
+import passport from 'passport';
+
 import Petrobot from '../models/petrobots.js';
 import User from './model.js';
 import auth from '../auth/middleware.js';
@@ -49,6 +51,38 @@ authRouter.get('/api/v1/petrobots/:id', auth, (req, res, next) => {
     .then(data => sendJSON(res, data))
     .catch(next);
 });
+
+// AUTH0 ROUTER INFO
+
+authRouter.get(
+  '/login',
+  passport.authenticate('auth0', {
+    clientID: process.env.AUTH0_CLIENT_ID,
+    domain: process.env.AUTH0_DOMAIN,
+    redirectUri: process.env.AUTH0_CALLBACK_URL,
+    audience: 'https://' + process.env.AUTH0_DOMAIN + '/userinfo',
+    responseType: 'code',
+    scope: 'openid',
+  }),
+  function (req, res) {
+    res.redirect(process.env.CLIENT_URL);
+  }
+);
+
+authRouter.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect(process.env.CLIENT_URL);
+});
+
+authRouter.get(
+  '/callback',
+  passport.authenticate('auth0', {
+    failureRedirect: process.env.CLIENT_URL,
+  }),
+  function (req, res) {
+    res.redirect(req.session.returnTo || '/user');
+  }
+);
 
 let sendJSON = (res, data) => {
   res.statusCode = 200;
