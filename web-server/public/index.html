@@ -57,7 +57,8 @@
         <div id="cash"></div>
     </main>
 
-    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
     <script>
         
@@ -66,6 +67,7 @@
         ENV.isProduction = window.location.protocol === 'https:';
         ENV.productionApiUrl = 'https://lab-18-auth-server.herokuapp.com/';
         ENV.developmentApiUrl = 'http://localhost:3000';
+        ENV.apiUrl = isProduction ? productionApiUrl : developmentApiUrl;
 
         let token = '';
 
@@ -79,7 +81,7 @@
                 headers: {
                     "Authorization": "Bearer " + token
                 },
-                url: "http://localhost:3000/api/v1/users",
+                url: `${ENV.apiUrl}/api/v1/users`,
                 async: false,
                 success: function (data) {
                     $('#cash').text(data);
@@ -95,7 +97,7 @@
             e.preventDefault();
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/signup",
+                url: `${ENV.apiUrl}signup`,
                 async: false,
                 data: postData,
                 success: function (data) {
@@ -112,8 +114,7 @@
             let password = $(this).find('[name=password]').val();
             let authstring = btoa(`${username}:${password}`);
             $.ajax({
-                type: "GET",
-                url: "http://localhost:3000/signin",
+                type:`${ENV.apiUrl}signin`,
                 async: false,
                 headers: {
                     "Authorization": "Basic " + authstring
@@ -146,7 +147,7 @@
 
         // let authURL = `${googleURL}?${QueryString}`;
 
-        $('#oauth').append(`<a href="http://localhost:3000/login">Login With Auth0</a>`);
+        $('#oauth').append(`<a href="${ENV.apiUrl}/login">Login With Auth0</a>`);
 
     </script>
     
