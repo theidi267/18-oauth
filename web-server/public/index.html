@@ -67,7 +67,7 @@
         ENV.isProduction = window.location.protocol === 'https:';
         ENV.productionApiUrl = 'https://lab-18-auth-server.herokuapp.com/';
         ENV.developmentApiUrl = 'http://localhost:3000';
-        ENV.apiUrl = isProduction ? productionApiUrl : developmentApiUrl;
+        ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
         let token = '';
 
