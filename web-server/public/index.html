@@ -60,6 +60,13 @@
     <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
     <script>
+        
+        const ENV = {};
+
+        ENV.isProduction = window.location.protocol === 'https:';
+        ENV.productionApiUrl = 'https://lab-18-auth-server.herokuapp.com/';
+        ENV.developmentApiUrl = 'http://localhost:3000';
+
         let token = '';
 
         $('#money').hide();
@@ -142,8 +149,7 @@
         $('#oauth').append(`<a href="http://localhost:3000/login">Login With Auth0</a>`);
 
     </script>
-
-
+    
 </body>
 
 </html>
