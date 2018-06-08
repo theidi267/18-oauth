@@ -27,6 +27,29 @@ userSchema.pre('findOne', function (next) {
   next();
 });
 
+userSchema.statics.createFromAuth0 = function(incoming) {
+  if (!incoming || !incoming.email) {
+    return Promise.reject('VALIDATION ERROR: missing username/email or password ');
+  }
+
+  return this.findOne({ email: incoming.email })
+    .then(user => {
+      if (!user) { throw new Error('User Not Found'); }
+      console.log('Welcome Back', user.username);
+      return user;
+    })
+    .catch(error => {
+      // Create the user
+      let username = incoming.email;
+      let password = incoming.password;
+      return this.create({
+        username: username,
+        password: password,
+        email: incoming.email,
+      });
+    });
+};
+
 userSchema.statics.authenticate = function (auth) {
   let query = { username: auth.username };
   return this.findOne(query)

@@ -8,6 +8,8 @@ import passport from 'passport';
 import Petrobot from '../models/petrobots.js';
 import User from './model.js';
 import auth from '../auth/middleware.js';
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+
 
 authRouter.post('/signup', (req, res, next) => {
   let user = new User(req.body);
@@ -62,7 +64,7 @@ authRouter.get(
     redirectUri: process.env.AUTH0_CALLBACK_URL,
     audience: 'https://' + process.env.AUTH0_DOMAIN + '/userinfo',
     responseType: 'code',
-    scope: 'openid',
+    scope: 'openid profile email',
   }),
   function (req, res) {
     res.redirect(process.env.CLIENT_URL);
@@ -80,7 +82,19 @@ authRouter.get(
     failureRedirect: process.env.CLIENT_URL,
   }),
   function (req, res) {
-    res.redirect(req.session.returnTo || '/user');
+    let user = {
+      username: req.user._json.given_name,
+      email: req.user._json.email,
+      password: req.user.id,
+    };    
+    User.createFromAuth0(user)
+      .then(user => {
+        console.log(user);
+        return user.generateToken();
+      })
+      .then(res.redirect(process.env.CLIENT_URL))
+      .catch();
+       
   }
 );
 
