@@ -1,5 +1,5 @@
 {
-  "name": "lab-18-auth-server",
+  "name": "auth-server",
   "version": "1.0.0",
   "description": "![cf](http://i.imgur.com/7v5ASc8.png) OAuth ===",
   "main": "index.js",
@@ -10,16 +10,8 @@
     "test-watch": "jest --watchAll --verbose --coverage",
     "watch": "nodemon index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/justeban/18-oauth.git"
-  },
-  "author": "Justin Morris and Timea HeidenReich",
+  "author": "Justin Morris and Timea Heidenreich",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/justeban/18-oauth/issues"
-  },
-  "homepage": "https://github.com/justeban/18-oauth#readme",
   "dependencies": {
     "babel-env": "^2.4.1",
     "babel-eslint": "^8.2.3",
