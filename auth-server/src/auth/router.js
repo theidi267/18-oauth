@@ -8,7 +8,7 @@ import passport from 'passport';
 import Petrobot from '../models/petrobots.js';
 import User from './model.js';
 import auth from '../auth/middleware.js';
-const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn(); //eslint-disable-line
 
 
 authRouter.post('/signup', (req, res, next) => {

@@ -38,7 +38,7 @@ userSchema.statics.createFromAuth0 = function(incoming) {
       console.log('Welcome Back', user.username);
       return user;
     })
-    .catch(error => {
+    .catch(error => { //eslint-disable-line
       // Create the user
       let username = incoming.email;
       let password = incoming.password;

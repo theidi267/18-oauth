@@ -9,8 +9,10 @@ const upload = multer({ dest: `${__dirname}/../tmp` });
 const uploadRouter = express.Router();
 
 uploadRouter.post('/upload', auth, upload.any(), (req, res, next) => {
-  if (!req.body.title || req.files.length > 1 || req.files[0].fieldname !== 'img')
+
+  if (!req.body.title || req.files.length > 1 || req.files[0].fieldname !== 'img') {
     return next('title or sample was not provided');
+  }
   let file = req.files[0];
   let key = `${file.filename}.${file.originalname}`;
   return s3.upload(file.path, key)

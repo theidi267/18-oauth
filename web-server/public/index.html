@@ -97,7 +97,7 @@
             e.preventDefault();
             $.ajax({
                 type: "POST",
-                url: `${ENV.apiUrl}signup`,
+                url: `${ENV.apiUrl}/signup`,
                 async: false,
                 data: postData,
                 success: function (data) {
@@ -114,7 +114,7 @@
             let password = $(this).find('[name=password]').val();
             let authstring = btoa(`${username}:${password}`);
             $.ajax({
-                type:`${ENV.apiUrl}signin`,
+                type:`${ENV.apiUrl}/signin`,
                 async: false,
                 headers: {
                     "Authorization": "Basic " + authstring
