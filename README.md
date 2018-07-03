@@ -51,7 +51,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMTg0ZDhmOGRkOWYwZDhlOTk2MmVjMSI
 
 **GET** `api/signin`
 
-### hhttps://lab-18-auth-server.herokuapp.com/api/signin
+### https://lab-18-auth-server.herokuapp.com/api/signin
 
 * `GET` request, if hit with Bearer token, user is signed in, otherwise throws error 'bummer'
 
