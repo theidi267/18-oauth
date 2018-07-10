@@ -10,7 +10,6 @@ import User from './model.js';
 import auth from '../auth/middleware.js';
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn(); //eslint-disable-line
 
-
 authRouter.post('/signup', (req, res, next) => {
   let user = new User(req.body);
   user.save()

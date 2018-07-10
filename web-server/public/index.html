@@ -92,7 +92,8 @@
         $('#signup').on('submit', function (e) {
             let username = $(this).find('[name=username]').val();
             let password = $(this).find('[name=password]').val();
-            let postData = { username, password };
+            let email = $(this).find('[name=email]').val();
+            let postData = { username, password, email };
 
             e.preventDefault();
             $.ajax({
@@ -101,6 +102,7 @@
                 async: false,
                 data: postData,
                 success: function (data) {
+                    console.log(data);
                     token = data;
                     $('#money').show();
                     $('#token').text(token);
@@ -113,8 +115,9 @@
             let username = $(this).find('[name=username]').val();
             let password = $(this).find('[name=password]').val();
             let authstring = btoa(`${username}:${password}`);
-            $.ajax({
-                type:`${ENV.apiUrl}/signin`,
+                $.ajax({
+                type: "GET",
+                url: `${ENV.apiUrl}/signin`,
                 async: false,
                 headers: {
                     "Authorization": "Basic " + authstring
