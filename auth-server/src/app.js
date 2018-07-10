@@ -49,10 +49,9 @@ app.use(express.urlencoded({extended: true}));
 // AUTH0 STUFF
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(uploadRouter);
 app.use(modelRouter);
+app.use(uploadRouter);
 app.use(authRouter);
-
 app.use(notFound);
 app.use(errorHandler);
 

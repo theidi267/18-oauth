@@ -1,6 +1,9 @@
 'use strict';
 
 import mongoose from 'mongoose';
+
+require('mongoose-schema-jsonschema')(mongoose);
+
 import Users from '../auth/model.js';
 
 const petrobotSchema = mongoose.Schema({
